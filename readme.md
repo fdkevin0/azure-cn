@@ -2,6 +2,12 @@
 
 ## Commands
 
+Install CDN Command
+
+```shell
+go install github.com/fdkevin0/azure-cn/cmd/azure-cn-cdn-cmd@latest
+```
+
 ### Upload Https Certficate
 
 ```shell
