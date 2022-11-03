@@ -65,7 +65,8 @@ func (c *Client) Request(method string, uri url.URL, body []byte, result any) (r
 		return nil, err
 	}
 	responseError := &ErrorResponse{}
-	if err = json.Unmarshal(responseBody, &responseError); err == nil && !responseError.Succeeded {
+	if err = json.Unmarshal(responseBody, &responseError); err == nil &&
+		responseError.Succeeded != nil && !*responseError.Succeeded {
 		return resp, responseError
 	}
 	if err = json.Unmarshal(responseBody, &result); err != nil {
@@ -84,8 +85,8 @@ type TaskResponse struct {
 }
 
 type ErrorResponse struct {
-	Succeeded bool
-	ErrorInfo struct {
+	Succeeded *bool
+	ErrorInfo *struct {
 		Type    string
 		Message string
 	}
